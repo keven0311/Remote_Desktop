@@ -1,0 +1,29 @@
+{
+  "name": "remote_desktop",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "remote desktop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keven0311/Remote_Desktop.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "kaichong lin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keven0311/Remote_Desktop/issues"
+  },
+  "homepage": "https://github.com/keven0311/Remote_Desktop#readme",
+  "dependencies": {
+    "get-pixels": "^3.3.3",
+    "robotjs": "^0.6.0",
+    "screenshot-desktop": "^1.15.0",
+    "ws": "^8.17.0"
+  }
+}

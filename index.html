@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<img id="img" src="" alt=""/>
+<body>
+    <script>
+        const img = document.getElementById('img')
+        const ws = new WebSocket(`ws://localhost:3001`)
+        ws.addEventListener('message', (e) => {
+            const data = JSON.parse(e.data);
+            img.src = `data:image/png;base64,${data.base64}`
+            img.style.width = data.width;
+            img.style.height = data.height;
+            
+        })
+    </script>
+</body>
+</html>
