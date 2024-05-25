@@ -17,6 +17,15 @@
             img.style.height = data.height;
             
         })
+        const handler = (e) => {
+            ws.send(JSON.stringify({
+                type: e.type,
+                x:e.clientX,
+                y:e.clientY
+            }))
+        }
+        img.onclick = handler;
+        img.ondblclick = handler;
     </script>
 </body>
 </html>

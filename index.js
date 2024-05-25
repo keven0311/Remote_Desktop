@@ -37,7 +37,6 @@ const getScreenSize = async () => {
     return new Promise((resolve,reject) => {
         getPixels(filePath, (err, pixels) => {
             const shape = pixels.shape;
-            const screenSize = robot.getScreenSize();
             resolve({
                 width:shape[0],
                 height: shape[1],
@@ -49,6 +48,13 @@ const getScreenSize = async () => {
 
 
 wss.on('connection', (ws) => {
+    ws.on('message', (message => {
+        const data = JSON.parse(message);
+        if(data.type === 'click'){
+            robot.moveMouse(data.x, data.y);  // move cusor to the target position
+            robot.mouseClick();    // handle mouse click
+        }
+    }))
     setInterval( async ()=> {
         try {
             const data = await getScreenSize()
