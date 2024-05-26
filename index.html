@@ -3,27 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Remote Desktop</title>
+    <link rel="stylesheet" href="index.css">
 </head>
-<img id="img" src="" alt=""/>
+    
+
 <body>
+    <div class="container">
+        <img id="img" src="" alt=""/>
+    </div>
     <script>
+        const currentIp = "192.168.1.71"
         const img = document.getElementById('img')
-        const ws = new WebSocket(`ws://localhost:3001`)
+        const ws = new WebSocket(`ws://${currentIp}:3001`)
+        
         ws.addEventListener('message', (e) => {
             const data = JSON.parse(e.data);
             img.src = `data:image/png;base64,${data.base64}`
-            img.style.width = data.width;
-            img.style.height = data.height;
-            
         })
+
+        // handle events:
         const handler = (e) => {
+            const rect = img.getBoundingClientRect();
+            const theX = e.clientX - rect.left;
+            const theY = e.clientY - rect.top;
+
             ws.send(JSON.stringify({
                 type: e.type,
-                x:e.clientX,
-                y:e.clientY
+                x:theX,
+                y:theY,
+                screenWidth:rect.width,
+                screenHeight:rect.height    
             }))
         }
+
         img.onclick = handler;
         img.ondblclick = handler;
     </script>
